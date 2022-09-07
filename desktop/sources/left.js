@@ -70,6 +70,17 @@ function Left () {
       this.project.page().commit()
     })
 
+    this.textarea_el.addEventListener('dragleave', (e) => {
+      if (!e.ctrlKey) return
+      var start = this.textarea_el.selectionStart
+      var finish = this.textarea_el.selectionEnd
+      var old_text = this.textarea_el.value
+      var moved_text = old_text.substring(start, finish-1)
+      document.execCommand('delete', false, moved_text)
+      this.textarea_el.setSelectionRange(start, start)
+      this.project.page().commit()
+    })
+
     this.theme.install(host)
   }
 

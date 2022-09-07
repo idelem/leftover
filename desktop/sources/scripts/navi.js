@@ -14,7 +14,7 @@ function Navi () {
     for (const pid in left.project.pages) {
       const page = left.project.pages[pid]
       if (!page) { continue }
-      html += `<ul class="${left.project.index === parseInt(pid) ? 'active' : ''}">`
+      html += `<ul class="${left.project.index === parseInt(pid) ? 'active' : ''}" ondrop='left.project.pages[${[pid]}].on_drop(event)'>`
       html += this._page(parseInt(pid), page)
       const markers = page.markers()
       for (const i in markers) {

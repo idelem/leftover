@@ -1,5 +1,6 @@
 'use strict'
 
+const { EOF } = require('dns')
 const fs = require('fs')
 const { app, dialog } = require('electron').remote
 const EOL = '\n'
@@ -9,6 +10,7 @@ function Page (text = '', path = null) {
   this.path = path
   this.size = 0
   this.watchdog = true
+  this.pos = 0
 
   this.name = function () {
     if (!this.path) { return 'Untitled' }
@@ -80,9 +82,19 @@ function Page (text = '', path = null) {
     const lines = this.text.split(EOL)
     for (const id in lines) {
       const line = lines[id].trim()
-      if (line.substr(0, 2) === '##') { a.push({ id: a.length, text: line.replace('##', '').trim(), line: parseInt(id), type: 'subheader' }) } else if (line.substr(0, 1) === '#') { a.push({ id: a.length, text: line.replace('#', '').trim(), line: parseInt(id), type: 'header' }) } else if (line.substr(0, 2) === '--') { a.push({ id: a.length, text: line.replace('--', '').trim(), line: parseInt(id), type: 'comment' }) }
+      if (line.substring(0, 2) === '##') { a.push({ id: a.length, text: line.replace('##', '').trim(), line: parseInt(id), type: 'subheader' }) } else if (line.substring(0, 1) === '#') { a.push({ id: a.length, text: line.replace('#', '').trim(), line: parseInt(id), type: 'header' }) } else if (line.substr(0, 2) === '--') { a.push({ id: a.length, text: line.replace('--', '').trim(), line: parseInt(id), type: 'comment' }) } else if (line.substr(0, 2) === '//') { a.push({ id: a.length, text: line.replace('//', '').trim(), line: parseInt(id), type: 'comment' }) } else if (line.substr(0, 5) === 'todo ') { a.push({ id: a.length, text: line.replace('todo ', '□ ').trim(), line: parseInt(id), type: 'todo' }) } else if (line.substr(0, 5) === 'done ') { a.push({ id: a.length, text: line.replace('done ', '√ ').trim(), line: parseInt(id), type: 'done' }) } 
     }
     return a
+  }
+
+  this.on_drop = function (e) {
+    const text = e.dataTransfer.getData('text')
+    this.text += EOL
+    this.text += text
+    if (this === left.project.page()) {
+      left.go.to_page(left.project.index)
+      left.go.to(left.project.page().pos, left.project.page().pos)
+    }
   }
 }
 
