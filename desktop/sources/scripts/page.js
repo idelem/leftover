@@ -82,7 +82,21 @@ function Page (text = '', path = null) {
     const lines = this.text.split(EOL)
     for (const id in lines) {
       const line = lines[id].trim()
-      if (line.substring(0, 2) === '##') { a.push({ id: a.length, text: line.replace('##', '').trim(), line: parseInt(id), type: 'subheader' }) } else if (line.substring(0, 1) === '#') { a.push({ id: a.length, text: line.replace('#', '').trim(), line: parseInt(id), type: 'header' }) } else if (line.substr(0, 2) === '--') { a.push({ id: a.length, text: line.replace('--', '').trim(), line: parseInt(id), type: 'comment' }) } else if (line.substr(0, 2) === '//') { a.push({ id: a.length, text: line.replace('//', '').trim(), line: parseInt(id), type: 'comment' }) } else if (line.substr(0, 5) === 'todo ') { a.push({ id: a.length, text: line.replace('todo ', '□ ').trim(), line: parseInt(id), type: 'todo' }) } else if (line.substr(0, 5) === 'done ') { a.push({ id: a.length, text: line.replace('done ', '√ ').trim(), line: parseInt(id), type: 'done' }) } 
+      if (line.substring(0, 2) === '##') { 
+        a.push({ id: a.length, text: line.replace('##', '').trim(), line: parseInt(id), type: 'subheader' }) 
+      } else if (line.substring(0, 1) === '#') { 
+        a.push({ id: a.length, text: line.replace('#', '').trim(), line: parseInt(id), type: 'header' }) 
+      } else if (line.substr(0, 2) === '--') { 
+        a.push({ id: a.length, text: line.replace('--', '').trim(), line: parseInt(id), type: 'comment' }) 
+      } else if (line.substr(0, 2) === '//') { 
+        a.push({ id: a.length, text: line.replace('//', '').trim(), line: parseInt(id), type: 'comment' }) 
+      } else if (line.substr(0, 5) === 'todo ') { 
+        a.push({ id: a.length, text: line.replace('todo ', '○ ').trim(), line: parseInt(id), type: 'todo' }) 
+      } else if (line.substr(0, 5) === 'done ') { 
+        a.push({ id: a.length, text: line.replace('done ', '√ ').trim(), line: parseInt(id), type: 'done' }) 
+      } else if (line.substr(0, 5) === 'mark ') { 
+        a.push({ id: a.length, text: line.replace('mark ', '').trim(), line: parseInt(id), type: 'mark' }) 
+      }
     }
     return a
   }

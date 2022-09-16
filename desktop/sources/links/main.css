@@ -21,6 +21,7 @@ body navi li.comment { padding-left: 30px;}
 body navi li.comment::before { content:""; left:0px; }
 body navi li.todo { padding-left: 30px;}
 body navi li.done { padding-left: 30px;}
+body navi li.mark { padding-left: 30px;}
 body navi li.changes::after { content:"*"; position: absolute; right: 15px; }
 body navi li i { padding-right:15px; }
 body navi > ul {}
