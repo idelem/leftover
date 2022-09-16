@@ -14,6 +14,7 @@ function Go () {
 
     left.load(page.text)
     left.go.to_line(line)
+    page.line = line
     left.update()
   }
 

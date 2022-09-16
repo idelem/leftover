@@ -81,6 +81,10 @@ function Left () {
       this.project.page().commit()
     })
 
+    this.textarea_el.addEventListener('click', () => {
+      left.project.page().line = this.textarea_el.value.substr(0, this.textarea_el.selectionStart).split("\n").length-1
+    })
+
     this.theme.install(host)
   }
 

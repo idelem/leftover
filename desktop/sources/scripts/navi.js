@@ -14,7 +14,7 @@ function Navi () {
     for (const pid in left.project.pages) {
       const page = left.project.pages[pid]
       if (!page) { continue }
-      html += `<ul class="${left.project.index === parseInt(pid) ? 'active' : ''}" ondrop='left.project.pages[${[pid]}].on_drop(event)'>`
+      html += `<ul class="${left.project.index === parseInt(pid) ? 'active' : ''}">`
       html += this._page(parseInt(pid), page)
       const markers = page.markers()
       for (const i in markers) {
@@ -27,7 +27,7 @@ function Navi () {
   }
 
   this._page = function (id, page) {
-    return `<li class='page ${page.has_changes() ? 'changes' : ''}' onclick='left.go.to_page(${id})'>${page.name()}</li>`
+    return `<li class='page ${page.has_changes() ? 'changes' : ''}' onclick='left.go.to_page(${id}, ${page.line})' ondrop='left.project.pages[${id}].on_drop(event)'>${page.name()}</li>`
   }
 
   this._marker = function (pid, current, marker, markers) {

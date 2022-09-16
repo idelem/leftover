@@ -108,6 +108,5 @@ document.onclick = function onClick (e) {
   left.selection.index = 0
   left.operator.stop()
   left.reader.stop()
-  left.project.page().pos = left.textarea_el.selectionStart
   left.update()
 }

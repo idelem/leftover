@@ -10,7 +10,7 @@ function Page (text = '', path = null) {
   this.path = path
   this.size = 0
   this.watchdog = true
-  this.pos = 0
+  this.line = 0
 
   this.name = function () {
     if (!this.path) { return 'Untitled' }
@@ -107,7 +107,7 @@ function Page (text = '', path = null) {
     this.text += text
     if (this === left.project.page()) {
       left.go.to_page(left.project.index)
-      left.go.to(left.project.page().pos, left.project.page().pos)
+      left.go.to_line(left.project.page().line)
     }
   }
 }
