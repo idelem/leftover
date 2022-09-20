@@ -17,5 +17,5 @@
 ## fix
 - [x] navi css breaks when file name is too long
 - [ ] scroll_to position is incorrect
-- [ ] textarea width grows as font grows
+- [x] textarea width overflows as font grows
 - [ ] find and replace unicode is broken
